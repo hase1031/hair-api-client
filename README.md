@@ -1,5 +1,7 @@
 # hair-api-client
 
+[![Build Status](https://travis-ci.org/hase1031/hair-api-client.svg?branch=master)](https://travis-ci.org/hase1031/hair-api-client)
+
 ```hair-api-client``` is a generic Ruby wrapper to access HAIR API.
  
 HAIR is Japanese web service.  
