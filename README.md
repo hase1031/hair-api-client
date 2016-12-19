@@ -34,6 +34,7 @@ Hair::Api::Client.configure do |options|
 end
  
 res = Hair::Api::Client.image_search('ponytail', {sort: 'asc'})
+res = Hair::Api::Client.record('xxxxxxxxxx', 'title', 'https://www.example.com/', Time.now)
 ```
 
 ## Development
