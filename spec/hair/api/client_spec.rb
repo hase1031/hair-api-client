@@ -100,4 +100,43 @@ describe Hair::Api::Client do
     end
   end
 
+  describe '#record' do
+
+    path = '/record'
+
+    context '200 status' do
+      sample_response =
+          {
+              status: 200,
+              message: 'OK',
+          }
+      it 'returns 200 status' do
+        WebMock.stub_request(:post, Hair::Api::Client::API_ENDPOINT + path).to_return(
+            :body => JSON.generate(sample_response),
+            :status => 200,
+            :headers => {'Content-type' => ' application/json'}
+        )
+        res = Hair::Api::Client.record('hiybkjtvqm', 'title', 'https://www.exaple.com/', Time.now)
+        expect(res.body['status']).to eq(sample_response[:status])
+        expect(res.body['message']).to eq(sample_response[:message])
+      end
+    end
+
+    context '500 status' do
+      sample_response =
+          {
+              status: 500,
+              message: 'Internal Server Error.',
+          }
+      it 'returns 500 status' do
+        WebMock.stub_request(:post, Hair::Api::Client::API_ENDPOINT + path).to_return(
+            :body => JSON.generate(sample_response),
+            :status => 500,
+            :headers => {'Content-type' => ' application/json'}
+        )
+        expect { Hair::Api::Client.record('hiybkjtvqm', 'title', 'https://www.exaple.com/', Time.now) }.to raise_error(Hair::Api::RequestError)
+      end
+    end
+  end
+
 end
